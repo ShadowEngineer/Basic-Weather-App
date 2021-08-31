@@ -3,10 +3,19 @@ h1 {
     text-align: center;
 }
 
+body {
+    font-family:monospace;
+}
+
 #root {
-    margin:0%, 20%, 0%, 20%;
-    background-color: lightcoral;
+    margin:0, 200px, 0, 200px;
+    background-color: white;
     text-align: center;
+}
+
+#target {
+    color:lime;
+    font-style:italic;
 }
 
 div.standard {
