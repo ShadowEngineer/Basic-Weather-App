@@ -5,6 +5,3 @@ openweathermap api
 3. display location !!! CANNOT DO WITHOUT PAYING !!!
 4. display weather at location (cloudy, sunny, rain, that kind of stuff)
 5. display forecast for tomorrow (at the same location)
-
-
-test
