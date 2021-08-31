@@ -1,8 +1,15 @@
 h1 {
-    color:rgb(140, 30, 30)
+    color:rgb(140, 30, 30);
+    text-align: center;
 }
 
-div {
+#root {
+    margin:0%, 20%, 0%, 20%;
+    background-color: lightcoral;
+    text-align: center;
+}
+
+div.standard {
     border-style:solid;
     border-color:rgb(140,30,30)
 }
