@@ -1,24 +1,56 @@
-h1 {
-    color:rgb(140, 30, 30);
-    text-align: center;
+body {
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    margin: 0px;
 }
 
-body {
-    font-family:monospace;
+h1 {
+    color: rgb(240,240,240);
+    text-shadow: 0px 0px 5px rgb(100,100,100);
 }
 
 #root {
-    margin:0, 200px, 0, 200px;
+    margin: 0px 20% 0px 20%;
     background-color: white;
     text-align: center;
+    border: 0px solid rgb(0, 100, 0);
+    background-color: rgb(120, 170, 100);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
 }
 
-#target {
-    color:lime;
-    font-style:italic;
+h3.weather_data_title {
+    font-family: sans-serif;
+    font-size: 16px;
+    font-size-adjust: unset;
 }
 
-div.standard {
-    border-style:solid;
-    border-color:rgb(140,30,30)
+div.weather_data_container {
+    background-color: rgb(225, 225, 225);
+    box-shadow: 0px 0px 15px rgb(0,0,0);
+    padding: 5px;
+    height: 200px;
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.weather_data_information {
+    flex-direction: column;
+}
+
+p.weather_data_paragraph {
+    color: rgb(25,25,25);
+    font-style: italic;
+    text-align: left;
+}
+
+img.weather_icon {
+    display: none;
+    justify-self: flex-end;
+    height: inherit;
+    aspect-ratio: 1;
 }

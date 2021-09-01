@@ -1,8 +1,16 @@
 openweathermap api
 
-1. display time (should update dynamically)
-2. display date
-3. display location !!! CANNOT DO WITHOUT PAYING !!!
-4. display weather at location (cloudy, sunny, rain, that kind of stuff)
-5. display forecast for tomorrow (at the same location)
-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
+1. display time (should update dynamically)	half done (need to do dynamics)
+2. display date					done
+3. display location				done
+4. display weather at location			done
+	- location name
+	- country
+	- description
+	- temperature
+	- humidity
+	- min-max temp
+	- wind speed
+	- wind direction
+	- icon
+5. display forecast for tomorrow		not done
