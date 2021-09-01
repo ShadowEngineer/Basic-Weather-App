@@ -22,23 +22,24 @@ var months = {
 
 //--Functions
 function convert_wind_direction(dir) {
+    //Converting the bearing (deg) into one of the 8 main directions.
     let offset = 22.5;
-    if (dir <= 0 + offset || dir > 0 - offset) {
-        return "northernly";
-    } else if (dir <= 45 + offset || dir > 45 - offset) {
-        return "northeasternly";
-    } else if (dir <= 90 + offset || dir > 90 - offset) {
-        return "easternly";
-    } else if (dir <= 135 + offset || dir > 135 - offset) {
-        return "southeasternly";
-    } else if (dir <= 180 + offset || dir > 180 - offset) {
-        return "southernly";
-    } else if (dir <= 225 + offset || dir > 225 - offset) {
-        return "southwesternly";
-    } else if (dir <= 270 + offset || dir > 270 - offset) {
-        return "westernly";
-    } else if (dir <= 315 + offset || dir > 315 - offset) {
-        return "northwesternly";
+    if (dir <= 0 + offset && dir > 0 - offset) {
+        return "north";
+    } else if (dir <= 45 + offset && dir > 45 - offset) {
+        return "northeast";
+    } else if (dir <= 90 + offset && dir > 90 - offset) {
+        return "east";
+    } else if (dir <= 135 + offset && dir > 135 - offset) {
+        return "southeast";
+    } else if (dir <= 180 + offset && dir > 180 - offset) {
+        return "south";
+    } else if (dir <= 225 + offset && dir > 225 - offset) {
+        return "southwest";
+    } else if (dir <= 270 + offset && dir > 270 - offset) {
+        return "west";
+    } else if (dir <= 315 + offset && dir > 315 - offset) {
+        return "northwest";
     }
 }
 
@@ -48,12 +49,16 @@ function display_info(data, target_element_id) {
 
     if (element && data.cod != 404) {
         //Constructing the string of information.
+        let date = new Date();
+        date.setTime(data.dt * 1000);
         let str = "";
         str += `${data.weather[0].description}\n`;
         str += `${data.main.temp}° but feels more like ${data.main.feels_like}°C.\n`
         str += `High of ${data.main.temp_max}°C and a low of ${data.main.temp_min}°C.\n`;
         str += `Humidity at ${data.main.humidity}%\n`;
-        str += `There is a ${convert_wind_direction(data.wind.deg)} wind travelling at ${data.wind.speed} m/s.\n`;
+        str += `There is a wind travelling at ${data.wind.speed} m/s, going ${convert_wind_direction(data.wind.deg)}.\n`;
+        str += `Cloud density is ${data.clouds.all}%.\n`
+        str += `Data gathered on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}.`
         element.innerText = str;
         
         //Formatting and displaying the icon representing the weather.
@@ -92,6 +97,8 @@ function query_location_city(city_name) {
     request.addEventListener("load", city_request_callback);
     request.open("GET", `${url}q=${city_name}&units=${units}&appid=${key}`);
     request.send();
+
+    //Setting the parameters for a new XMLHttp request to get the forecasted weather.
 }
 
 function query_location_coord(data) {
@@ -120,7 +127,7 @@ function submissionHandler(event) {
 }
 
 function initialise() {
-    //Displaying the date and time currently.
+    //Processing date and time.
     let date = new Date();
     let day = date.getDay() + ""
     let sub = day.substring(day.length - 1)
@@ -133,8 +140,13 @@ function initialise() {
     } else {
         day += "th";
     }
-    document.getElementById("date").innerHTML = `Today, ${months[date.getMonth()]} ${day} in the year ${date.getFullYear()}`;
-    document.getElementById("time").innerHTML = `At, ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+    //Displaying the date and updating time every second.
+    document.getElementById("date").innerText = `Today, ${months[date.getMonth()]} ${day} in the year ${date.getFullYear()}`;
+    var timer = setInterval(function(){
+        date = new Date();
+        document.getElementById("time").innerText = `At, ${date.toLocaleTimeString()}`;
+    }, 1000);
 
     //Listening to the form being submitted with event data.
     let input_form = document.getElementById("form");

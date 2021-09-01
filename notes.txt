@@ -1,6 +1,6 @@
 openweathermap api
 
-1. display time (should update dynamically)	half done (need to do dynamics)
+1. display time (should update dynamically)	done
 2. display date					done
 3. display location				done
 4. display weather at location			done
@@ -14,3 +14,8 @@ openweathermap api
 	- wind direction
 	- icon
 5. display forecast for tomorrow		not done
+
+auto -> current_home_latlon -> forecast_home_latlon
+button -> current_search_name -> forecast_search_latlon
+4 API calls to include forecast information. 2 if forecast information but no cityname + country initials.
+session storage/local storage to reduce API calls/min?
