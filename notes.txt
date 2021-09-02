@@ -13,9 +13,14 @@ openweathermap api
 	- wind speed
 	- wind direction
 	- icon
-5. display forecast for tomorrow		not done
+5. display forecast for tomorrow		done
 
 auto -> current_home_latlon -> forecast_home_latlon
 button -> current_search_name -> forecast_search_latlon
 4 API calls to include forecast information. 2 if forecast information but no cityname + country initials.
 session storage/local storage to reduce API calls/min?
+
+turns out, only 2 API calls are needed, since the OneCallAPI displays the region and city name (not country initials tho)
+as long as I use some sort of geocoding to convert a city name to lat and long, I only need to make one API call for each city.
+
+forecasting is now done, but dear oh dear... the way I implemented it is disgusting. But hey! I'll probably learn a better way to do it later on. For now, it works. And that's the only thing that matters.
