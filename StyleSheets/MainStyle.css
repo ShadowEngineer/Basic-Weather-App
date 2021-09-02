@@ -36,6 +36,8 @@ div.weather_data_container {
     width: 800px;
     display: flex;
     justify-content: space-between;
+    border-radius: 10px;
+    margin: 5px 0px 5px 0px;
 }
 
 div.weather_data_information {
