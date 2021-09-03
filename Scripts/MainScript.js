@@ -48,41 +48,41 @@ function display_info(data, target_element_id, forecast) {
     let element = document.getElementById(target_element_id)
     if (!element) {console.log(`Invalid target_element_id: ${target_element_id}`);}
     element.parentElement.parentElement.style.display = "flex";
-    
+
     if (!forecast) {
         if (data.cod != 404) {
             let date = new Date();
             date.setTime(data.dt * 1000);
-            let str = "";
-            str += `${data.weather[0].description}\n`;
-            str += `${data.main.temp}° but feels more like ${data.main.feels_like}°C.\n`
-            str += `High of ${data.main.temp_max}°C and a low of ${data.main.temp_min}°C.\n`;
-            str += `Humidity at ${data.main.humidity}%.\n`;
-            str += `There is a wind travelling at ${data.wind.speed} m/s, going ${convert_wind_direction(data.wind.deg)}.\n`;
-            str += `Cloud density is ${data.clouds.all}%.\n`
-            str += `Data gathered on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}.`
-            element.innerText = str;
+            let information = "";
+            information += `${data.weather[0].description}\n`;
+            information += `${data.main.temp}° but feels more like ${data.main.feels_like}°C.\n`
+            information += `High of ${data.main.temp_max}°C and a low of ${data.main.temp_min}°C.\n`;
+            information += `Humidity at ${data.main.humidity}%.\n`;
+            information += `There is a wind travelling at ${data.wind.speed} m/s, going ${convert_wind_direction(data.wind.deg)}.\n`;
+            information += `Cloud density is ${data.clouds.all}%.\n`
+            information += `Data gathered on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}.`
+            element.innerText = information;
             
             let icon_element = document.getElementById(target_element_id + "_img");
             icon_element.setAttribute("src", `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
             icon_element.style.display = "block";
             
         } else {
-            element.innerHTML = "No valid information. Retry again.";
+            element.innerHTML = "No valid information.";
             console.log(`No valid data, code ${data.cod}`);
         }
     } else {
         let date = new Date();
         let current_hour = date.getHours();
         let data_object = data.hourly[current_hour];
-        let str = "";
-        str += `${data_object.weather[0].description}\n`;
-        str += `${data_object.temp}° but might feel more like ${data_object.feels_like}°C.\n`
-        str += `Humidity might be at ${data_object.humidity}%.\n`;
-        str += `There might be a wind travelling at ${data_object.wind_speed} m/s, going ${convert_wind_direction(data_object.wind_deg)}.\n`;
-        str += `Cloud density might be ${data_object.clouds}%.\n`
-        str += `Average visibility might be at ${data_object.visibility}m.`
-        element.innerText = str;
+        let information = "";
+        information += `${data_object.weather[0].description}\n`;
+        information += `${data_object.temp}° but might feel more like ${data_object.feels_like}°C.\n`
+        information += `Humidity might be at ${data_object.humidity}%.\n`;
+        information += `There might be a wind travelling at ${data_object.wind_speed} m/s, going ${convert_wind_direction(data_object.wind_deg)}.\n`;
+        information += `Cloud density might be ${data_object.clouds}%.\n`
+        information += `Average visibility might be at ${data_object.visibility}m.`
+        element.innerText = information;
         
         let icon_element = document.getElementById(target_element_id.substring(0, target_element_id.length-4) + "_img_new");
         icon_element.setAttribute("src", `https://openweathermap.org/img/wn/${data_object.weather[0].icon}@2x.png`);
