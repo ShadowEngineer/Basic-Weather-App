@@ -1,5 +1,4 @@
 :root {
-    /* Main colour palette for the page */
     --primary: #023047;
     --secondary: #8ECAE6;
     --tertiary: #FFB703;
@@ -62,7 +61,7 @@ div.weather_data_container {
     box-shadow: 0px 0px 15px var(--element-shadow);
     border: 2px solid #0F0F0F;
     border-radius: 10px;
- 
+
     padding: 5px;
     margin: 5px 0px 5px 0px;
     height: fit-content;

@@ -46,7 +46,7 @@ function convert_wind_direction(dir) {
 
 function display_info(data, target_element_id, forecast) {
     let element = document.getElementById(target_element_id)
-    if (!element) {console.log(`Invalid target_element_id: ${target_element_id}`);}
+    if (!element) {return;}
     element.parentElement.parentElement.style.display = "flex";
 
     if (!forecast) {
@@ -69,7 +69,6 @@ function display_info(data, target_element_id, forecast) {
             
         } else {
             element.innerHTML = "No valid information.";
-            console.log(`No valid data, code ${data.cod}`);
         }
     } else {
         let date = new Date();
@@ -94,7 +93,6 @@ function city_request_callback(event) {
     const data = JSON.parse(this.responseText);
 
     if (data.name) {
-        console.log(data);
         title_info.title_1_city = data.name;
         title_info.title_1_countrycode = data.sys.country;
         document.getElementById("target_title").innerText = `Weather at ${title_info.title_1_city}, ${title_info.title_1_countrycode}`;
@@ -105,16 +103,11 @@ function city_request_callback(event) {
         request_2.open("GET", `${url_onecall}lat=${data.coord.lat}&lon=${data.coord.lon}&units=${units}&appid=${key}`);
         request_2.send();
     } else if (data.timezone) {
-        console.log(data);
-
         let existing_node = document.getElementById("city_forecast_container");
         if (existing_node) {
-            console.log("append to existing node");
             document.getElementById("target_title_new").innerText = `Weather in one day at ${title_info.title_1_city}, ${title_info.title_1_countrycode}`;
             display_info(data, "target_new", true);
         } else {
-            console.log("creating new node");
-
             let root_node = document.getElementById("root");
             let original_node = document.getElementById("city_container");
             let new_node = original_node.cloneNode(true);
@@ -143,13 +136,11 @@ function coord_request_callback(event) {
     const data = JSON.parse(this.responseText);
 
     if (data.name) {
-        console.log(data);
         document.getElementById("target_2_title").innerText = `Weather at ${data.name}, ${data.sys.country}`;
         title_info.title_2_city = data.name;
         title_info.title_2_countrycode = data.sys.country;
         display_info(data, "target_2");
     } else if (data.timezone) {
-        console.log(data);
         
         //I'd rather clone an existing div rather than have on already on the page. Saves time and HTML work.
         let root_node = document.getElementById("root");
